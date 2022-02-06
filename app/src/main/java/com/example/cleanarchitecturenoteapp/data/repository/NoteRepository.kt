@@ -2,25 +2,26 @@ package com.example.cleanarchitecturenoteapp.data.repository
 
 import com.example.cleanarchitecturenoteapp.data.local.NoteDao
 import com.example.cleanarchitecturenoteapp.data.local.entity.NoteEntity
+import com.example.cleanarchitecturenoteapp.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
 
 
-class NoteRepository(
+class NoteRepositoryImpl(
     private val dao:NoteDao
-) {
+):NoteRepository {
 
-    suspend fun saveNote(note:NoteEntity){
+    override suspend fun saveNote(note:NoteEntity){
         dao.insertNote(note)
 
     }
 
-    fun getNotes():Flow<List<NoteEntity>> {
+    override fun getNotes():Flow<List<NoteEntity>> {
         return  dao.getAll()
 
     }
 
-    suspend fun getNote(id:Int):NoteEntity{
+    override suspend fun getNote(id:Int):NoteEntity{
         return dao.getNoteById(id)
     }
 
